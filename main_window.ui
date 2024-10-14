@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>JetBrainsMonoNL NFP</family>
+    <pointsize>12</pointsize>
+    <italic>false</italic>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 12pt &quot;JetBrainsMonoNL NFP&quot;;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1921</width>
+      <height>991</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="widget_geometry" native="true"/>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="layout_settings">
+         <item>
+          <widget class="QLabel" name="label_settings">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>JetBrainsMonoNL NFP</family>
+             <pointsize>16</pointsize>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: bold;
+font-size: 16pt;</string>
+           </property>
+           <property name="text">
+            <string>Настройки</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_time">
+               <property name="text">
+                <string>Время выполнения (с)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_hx">
+               <property name="text">
+                <string>Размер шага по пространству</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_ht">
+               <property name="text">
+                <string>Размер шага по времени</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLineEdit" name="lineEdit_time">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_hx">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ht">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <layout class="QVBoxLayout" name="layout_init_conds">
+         <item>
+          <widget class="QLabel" name="label_init_conds">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>JetBrainsMonoNL NFP</family>
+             <pointsize>16</pointsize>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: bold;
+font-size: 16pt;</string>
+           </property>
+           <property name="text">
+            <string>Начальные условия</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_k">
+               <property name="text">
+                <string>Коэффициент теплопроводности (k)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_c">
+               <property name="text">
+                <string>Удельная теплоемкость (c)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_rho">
+               <property name="text">
+                <string>Плотность тканей (ρ)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_t0">
+               <property name="text">
+                <string>Начальная температура (T0)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QLineEdit" name="lineEdit_k">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_c">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_rho">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_t0">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <widget class="QPushButton" name="pushButton_upload_imgs">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: rgba(0, 0, 0, 30);
+	border: 1px solid rgba(0, 0, 0, 40);
+	border-radius: 7px;
+	width: 230px;
+	height: 50px;
+}
+
+QPushButton:hover {
+	background-color: rgba(0, 0, 0, 40);
+}
+
+QPushButton:pressed {
+	background-color: rgba(0, 0, 0, 70);
+}</string>
+           </property>
+           <property name="text">
+            <string>Загрузка изображений</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_export">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: rgba(0, 0, 0, 30);
+	border: 1px solid rgba(0, 0, 0, 40);
+	border-radius: 7px;
+	width: 230px;
+	height: 50px;
+}
+
+QPushButton:hover {
+	background-color: rgba(0, 0, 0, 40);
+}
+
+QPushButton:pressed {
+	background-color: rgba(0, 0, 0, 70);
+}</string>
+           </property>
+           <property name="text">
+            <string>Экспорт точек</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_run">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: rgba(0, 0, 0, 30);
+	border: 1px solid rgba(0, 0, 0, 40);
+	border-radius: 7px;
+	width: 230px;
+	height: 50px;
+}
+
+QPushButton:hover {
+	background-color: rgba(0, 0, 0, 40);
+}
+
+QPushButton:pressed {
+	background-color: rgba(0, 0, 0, 70);
+}</string>
+           </property>
+           <property name="text">
+            <string>Запуск</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QLabel" name="label_vizual">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>JetBrainsMonoNL NFP</family>
+           <pointsize>16</pointsize>
+           <italic>false</italic>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-weight: bold;
+font-size: 16pt;</string>
+         </property>
+         <property name="text">
+          <string>Визуализация</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_layer_num">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Номер слоя</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_layer_num">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_layer" native="true"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>x</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_x">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>y</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_y">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>z</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_z">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(0, 0, 0, 30);
+border: 1px solid rgba(0, 0, 0, 40);
+border-radius: 7px;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_temperature" native="true"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
