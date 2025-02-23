@@ -2,7 +2,8 @@ import sys
 import matplotlib
 
 from draw import draw3d, draw3dдырявое, draw2d
-from brain_app import Ui_MainWindow
+from test import compute
+from ui.main_window import Ui_MainWindow
 
 matplotlib.use('Qt5Agg')
 
@@ -32,45 +33,47 @@ class MainWindow(QMainWindow):
 
         # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title='Геометрия')
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100,
-                                         title=f'Геометрия (слой {self.image})', projection='3d')
+                                         title=f'Геометрия (слой {self.image})')
         # canvas_geometry.ax.plot([0,1,2,3,4], [10,1,20,3,40])
 
         # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
-        self.toolbar = NavigationToolbar(self.canvas_geometry, self)
+        self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
 
         self.layout_geometry = QVBoxLayout()
         self.layout_geometry.addWidget(self.canvas_geometry)
-        self.layout_geometry.addWidget(self.toolbar)
+        self.layout_geometry.addWidget(self.toolbar_geometry)
 
-        canvas_layer = MplCanvas(self)
-        toolbar = NavigationToolbar(self.canvas_geometry, self)
+        self.canvas_layer = MplCanvas(self)
+        self.toolbar_layer = NavigationToolbar(self.canvas_layer, self)
 
-        layout_layer = QVBoxLayout()
-        layout_layer.addWidget(canvas_layer)
-        layout_layer.addWidget(toolbar)
+        self.layout_layer = QVBoxLayout()
+        self.layout_layer.addWidget(self.canvas_layer)
+        self.layout_layer.addWidget(self.toolbar_layer)
 
-        canvas_temperature = MplCanvas(self)
-        toolbar = NavigationToolbar(canvas_temperature, self)
+        self.canvas_temperature = MplCanvas(self)
+        self.toolbar_temperature = NavigationToolbar(self.canvas_temperature, self)
 
-        layout_temperature = QVBoxLayout()
-        layout_temperature.addWidget(canvas_temperature)
-        layout_temperature.addWidget(toolbar)
+        self.layout_temperature = QVBoxLayout()
+        self.layout_temperature.addWidget(self.canvas_temperature)
+        self.layout_temperature.addWidget(self.toolbar_temperature)
 
         # Create a placeholder widget to hold our toolbar and canvas.
         # widget = QWidget()
         self.ui.widget_geometry.setLayout(self.layout_geometry)
-        self.ui.widget_layer.setLayout(layout_layer)
-        self.ui.widget_temperature.setLayout(layout_temperature)
+        self.ui.widget_layer.setLayout(self.layout_layer)
+        self.ui.widget_temperature.setLayout(self.layout_temperature)
         # self.setCentralWidget(widget)
 
-        self.ui.pushButton.clicked.connect(self.__prev)
-        self.ui.pushButton_2.clicked.connect(self.__next)
+        self.ui.pushButton_left.clicked.connect(self.__prev)
+        self.ui.pushButton_right.clicked.connect(self.__next)
+        self.ui.pushButton_start.clicked.connect(self.__start)
+        self.ui.pushButton_plot_temp.clicked.connect(self.__plot_temp)
 
 
-        draw3d(132, self.canvas_geometry.ax, 'images')
+        # draw3d(132, self.canvas_geometry.ax, 'images')
         # draw3dдырявое(132, self.canvas_geometry.ax, 'images')
 
-        # draw2d(self.image, self.canvas_geometry.ax, 'images')
+        draw2d(self.image, self.canvas_geometry.ax, 'images')
 
 
         # self.show()
@@ -81,16 +84,16 @@ class MainWindow(QMainWindow):
 
         self.image += 1
         self.layout_geometry.removeWidget(self.canvas_geometry)
-        self.layout_geometry.removeWidget(self.toolbar)
-        self.toolbar.deleteLater()
+        self.layout_geometry.removeWidget(self.toolbar_geometry)
+        self.toolbar_geometry.deleteLater()
         self.canvas_geometry.deleteLater()
         self.canvas_geometry.hide()
-        self.toolbar.hide()
+        self.toolbar_geometry.hide()
 
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.layout_geometry.addWidget(self.canvas_geometry)
-        self.toolbar = NavigationToolbar(self.canvas_geometry, self)
-        self.layout_geometry.addWidget(self.toolbar)
+        self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
+        self.layout_geometry.addWidget(self.toolbar_geometry)
 
         draw2d(self.image, self.canvas_geometry.ax, 'images')
         # self.show()
@@ -101,22 +104,77 @@ class MainWindow(QMainWindow):
 
         self.image -= 1
         self.layout_geometry.removeWidget(self.canvas_geometry)
-        self.layout_geometry.removeWidget(self.toolbar)
-        self.toolbar.deleteLater()
+        self.layout_geometry.removeWidget(self.toolbar_geometry)
+        self.toolbar_geometry.deleteLater()
         self.canvas_geometry.deleteLater()
         self.canvas_geometry.hide()
-        self.toolbar.hide()
+        self.toolbar_geometry.hide()
 
         # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
-        self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})', projection='3d')  # (self.fig)
+        self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.layout_geometry.addWidget(self.canvas_geometry)
-        self.toolbar = NavigationToolbar(self.canvas_geometry, self)
-        self.layout_geometry.addWidget(self.toolbar)
+        self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
+        self.layout_geometry.addWidget(self.toolbar_geometry)
 
         draw2d(self.image, self.canvas_geometry.ax, 'images')
         # draw3dдырявое(132, self.canvas_geometry.ax, 'images')
         # self.show()
 
+    def __start(self):
+        Ts = compute(self.image)
+
+        self.Ts = Ts
+
+        self.layout_layer.removeWidget(self.canvas_layer)
+        self.layout_layer.removeWidget(self.toolbar_layer)
+        self.toolbar_layer.deleteLater()
+        self.canvas_layer.deleteLater()
+        self.canvas_layer.hide()
+        self.toolbar_layer.hide()
+
+        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
+        self.canvas_layer = MplCanvas(self)  # (self.fig)
+        self.layout_layer.addWidget(self.canvas_layer)
+        self.toolbar_layer = NavigationToolbar(self.canvas_layer, self)
+        self.layout_layer.addWidget(self.toolbar_layer)
+
+        print(Ts.keys())
+
+        temp = self.canvas_layer.ax.imshow(Ts[list(Ts.keys())[-1]])
+        self.canvas_layer.figure.colorbar(temp)
+        # plt.show()
+        # self.ui.widget_layer.show()
+        # self.ui.widget_temperature.show()
+
+    def __plot_temp(self):
+        try:
+            Ts = self.Ts
+        except AttributeError:
+            print(self.ui.lineEdit_x.text(), self.ui.lineEdit_y.text())
+            return
+
+        self.layout_temperature.removeWidget(self.canvas_temperature)
+        self.layout_temperature.removeWidget(self.toolbar_temperature)
+        self.toolbar_temperature.deleteLater()
+        self.canvas_temperature.deleteLater()
+        self.canvas_temperature.hide()
+        self.toolbar_temperature.hide()
+
+        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
+        self.canvas_temperature = MplCanvas(self)  # (self.fig)
+        self.layout_temperature.addWidget(self.canvas_temperature)
+        self.toolbar_temperature = NavigationToolbar(self.canvas_temperature, self)
+        self.layout_temperature.addWidget(self.toolbar_temperature)
+
+        x = int(self.ui.lineEdit_x.text())
+        y = int(self.ui.lineEdit_y.text())
+
+        T = []
+
+        for temps in Ts.values():
+            T.append(temps[y][x])
+
+        self.canvas_temperature.ax.plot(Ts.keys(), T)
 
 
 if __name__ == '__main__':

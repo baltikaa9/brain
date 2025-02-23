@@ -5,13 +5,15 @@ import math
 from matplotlib import cm
 
 
-# fig = plt.figure()
-def draw2d(i: int, ax, folder_path):
-    print(i, ax, folder_path)
-    img = cv2.imread(f'{folder_path}/image({i}).png', 0) # чтение изображений
-    data = np.stack(img, axis=0) # преобразование в массив
+def open_image(i: int, folder_path: str) -> np.ndarray:
+    img = cv2.imread(f'{folder_path}/image({i}).png', 0)  # чтение изображений
+    data = np.stack(img, axis=0)  # преобразование в массив
+    return data
 
-    for y in range(360): # фильтрация точек
+def get_points(data: np.ndarray, empty=True):
+    X, Y = [], []
+
+    for y in range(360):  # фильтрация точек
         for x in range(330):
             if data[y][x] < 100:
                 data[y][x] = 0
@@ -20,7 +22,36 @@ def draw2d(i: int, ax, folder_path):
     # ax1 = fig.add_subplot(222)
     # fig.subplots_adjust(wspace=0.6, hspace=0.6)
 
-    ax.scatter(x, y[::-1], color='black')
+    if not empty:
+        return x, y
+
+    X.extend([x[0]])
+    Y.extend(sorted(list(set(y)) * 2))
+
+    x_count = 1
+    for i in range(1, len(x) - 1):
+        if x[i] < x[i - 1]:
+            X.append(x[i - 1])
+            X.append(x[i])
+            x_count += 2
+    if x[-1] > x[-2]:
+        X.append(x[-1])
+    else:
+        X.append(x[-2])
+        Y = Y[:-2]
+    x_count += 1
+    return X, Y
+
+
+# fig = plt.figure()
+def draw2d(i: int, ax, folder_path):
+    # print(i, ax, folder_path)
+    data = open_image(i, folder_path)
+
+    X, Y = get_points(data, False)
+
+    ax.scatter(X, Y[::-1], color='black')
+    # ax.triplot(x, y[::-1], color='black')
 
 
 def draw3dдырявое(count: int, ax, folder_path):
