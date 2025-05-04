@@ -186,6 +186,8 @@ def pennes(
                 T0[i][j] = T_right  # Используем параметр T_right
                 continue
 
+    print(T0)
+
     TT = {}
     k = lam * dt / (rho * c * dx * dy)
 
