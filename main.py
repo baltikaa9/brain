@@ -1,8 +1,10 @@
 import sys
 import matplotlib
+import numpy as np
 
+from computer import pennes
 from draw import draw3d, draw3dдырявое, draw2d
-from test import compute
+from computer import thermal_conductivity
 from ui.main_window import Ui_MainWindow
 
 matplotlib.use('Qt5Agg')
@@ -121,7 +123,8 @@ class MainWindow(QMainWindow):
         # self.show()
 
     def __start(self):
-        Ts = compute(self.image)
+        # Ts = thermal_conductivity(self.image)
+        Ts = pennes(self.image)
 
         self.Ts = Ts
 
@@ -140,8 +143,14 @@ class MainWindow(QMainWindow):
 
         print(Ts.keys())
 
-        temp = self.canvas_layer.ax.imshow(Ts[list(Ts.keys())[-1]])
-        self.canvas_layer.figure.colorbar(temp)
+        # Получаем последний момент времени
+        last_time = max(Ts.keys())  # Находим максимальный ключ
+        last_temp = np.array(Ts[last_time])  # Берём последний температурный массив
+
+        # temp = self.canvas_layer.ax.imshow(Ts[list(Ts.keys())[-1]])
+        img = self.canvas_layer.ax.imshow(last_temp.T, origin='lower')
+        self.canvas_layer.figure.colorbar(img, label='Температура (°C)')
+        self.canvas_layer.ax.set_title(f'Время: {last_time} с')
         # plt.show()
         # self.ui.widget_layer.show()
         # self.ui.widget_temperature.show()
