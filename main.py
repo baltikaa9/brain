@@ -123,8 +123,23 @@ class MainWindow(QMainWindow):
         # self.show()
 
     def __start(self):
+        T_left = float(self.ui.lineEdit_T_left.text())
+        T_right = float(self.ui.lineEdit_T_right.text())
+        T_top = float(self.ui.lineEdit_T_top.text())
+        T_bottom = float(self.ui.lineEdit_T_bottom.text())
+        T_outside = float(self.ui.lineEdit_T_outside.text())
+
+        # Вызов функции с новыми параметрами
+        Ts = pennes(
+            layer=self.image,
+            T_left=T_left,
+            T_right=T_right,
+            T_top=T_top,
+            T_bottom=T_bottom,
+            T_outside=T_outside
+        )
         # Ts = thermal_conductivity(self.image)
-        Ts = pennes(self.image)
+        # Ts = pennes(self.image)
 
         self.Ts = Ts
 

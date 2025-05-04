@@ -78,9 +78,55 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.lineEdit_4)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.label_T_left = QLabel(self.widget_3)
+        self.label_T_left.setObjectName(u"label_T_left")
 
-        self.formLayout.setItem(4, QFormLayout.LabelRole, self.verticalSpacer_3)
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_T_left)
+
+        self.lineEdit_T_left = QLineEdit(self.widget_3)
+        self.lineEdit_T_left.setObjectName(u"lineEdit_T_left")
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.lineEdit_T_left)
+
+        self.label_T_right = QLabel(self.widget_3)
+        self.label_T_right.setObjectName(u"label_T_right")
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_T_right)
+
+        self.lineEdit_T_right = QLineEdit(self.widget_3)
+        self.lineEdit_T_right.setObjectName(u"lineEdit_T_right")
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.lineEdit_T_right)
+
+        self.label_T_top = QLabel(self.widget_3)
+        self.label_T_top.setObjectName(u"label_T_top")
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_T_top)
+
+        self.lineEdit_T_top = QLineEdit(self.widget_3)
+        self.lineEdit_T_top.setObjectName(u"lineEdit_T_top")
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.lineEdit_T_top)
+
+        self.label_T_bottom = QLabel(self.widget_3)
+        self.label_T_bottom.setObjectName(u"label_T_bottom")
+
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_T_bottom)
+
+        self.lineEdit_T_bottom = QLineEdit(self.widget_3)
+        self.lineEdit_T_bottom.setObjectName(u"lineEdit_T_bottom")
+
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.lineEdit_T_bottom)
+
+        self.label_T_outside = QLabel(self.widget_3)
+        self.label_T_outside.setObjectName(u"label_T_outside")
+
+        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.label_T_outside)
+
+        self.lineEdit_T_outside = QLineEdit(self.widget_3)
+        self.lineEdit_T_outside.setObjectName(u"lineEdit_T_outside")
+
+        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.lineEdit_T_outside)
 
 
         self.verticalLayout_4.addWidget(self.widget_3)
@@ -267,6 +313,16 @@ class Ui_MainWindow(object):
         self.lineEdit_3.setText(QCoreApplication.translate("MainWindow", u"1108", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0447\u0430\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 (T0)", None))
         self.lineEdit_4.setText(QCoreApplication.translate("MainWindow", u"38", None))
+        self.label_T_left.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 \u0441\u043b\u0435\u0432\u0430 (\u00b0C)", None))
+        self.lineEdit_T_left.setText(QCoreApplication.translate("MainWindow", u"100.0", None))
+        self.label_T_right.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 \u0441\u043f\u0440\u0430\u0432\u0430 (\u00b0C)", None))
+        self.lineEdit_T_right.setText(QCoreApplication.translate("MainWindow", u"100.0", None))
+        self.label_T_top.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 \u0441\u0432\u0435\u0440\u0445\u0443 (\u00b0C)", None))
+        self.lineEdit_T_top.setText(QCoreApplication.translate("MainWindow", u"100.0", None))
+        self.label_T_bottom.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 \u0441\u043d\u0438\u0437\u0443 (\u00b0C)", None))
+        self.lineEdit_T_bottom.setText(QCoreApplication.translate("MainWindow", u"100.0", None))
+        self.label_T_outside.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u043f\u0435\u0440\u0430\u0442\u0443\u0440\u0430 \u0441\u043d\u0430\u0440\u0443\u0436\u0438 (\u00b0C)", None))
+        self.lineEdit_T_outside.setText(QCoreApplication.translate("MainWindow", u"0.0", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439", None))
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"\u042d\u043a\u0441\u043f\u043e\u0440\u0442 \u0442\u043e\u0447\u0435\u043a", None))
         self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043f\u0443\u0441\u043a", None))
