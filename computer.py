@@ -130,7 +130,14 @@ def thermal_conductivity(layer: int) -> dict[list[list[float]]]:
 
     return TTT
 
-def pennes(layer: int) -> dict[float, np.ndarray]:
+def pennes(
+    layer: int,
+    T_outside: float = 0.0,
+    T_left: float = 100.0,
+    T_right: float = 100.0,
+    T_bottom: float = 100,
+    T_top: float = 100,
+) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
     t_max = 30
     t = 0
@@ -162,17 +169,24 @@ def pennes(layer: int) -> dict[float, np.ndarray]:
     m = len(y)
 
     # Инициализация температуры: 0 везде, кроме области головы
-    T0 = [[0.0 for _ in y] for _ in x]
+    T0 = [[T_outside for _ in y] for _ in x]
     for i in range(n):
         for j in range(m):
-            if left_bound[j] <= x[i] <= right_bound[j]:
+            if left_bound[j] < x[i] < right_bound[j]:
                 T0[i][j] = 38.0  # Начальная температура внутри головы
+            elif x[i] == left_bound[j]:
+                T0[i][j] = T_left  # Используем параметр T_left
+                continue
+            # Для правой границы
+            elif x[i] == right_bound[j]:
+                T0[i][j] = T_right  # Используем параметр T_right
+                continue
 
     TT = {}
     k = lam * dt / (rho * c)
 
     while t <= t_max:
-        T1 = [[0.0 for _ in y] for _ in x]
+        T1 = T0.copy()
         for i in range(n):
             for j in range(m):
                 if x[i] < left_bound[j] or x[i] > right_bound[j]:
@@ -189,9 +203,9 @@ def pennes(layer: int) -> dict[float, np.ndarray]:
 
                 # Лапласиан по Y (аналогично предыдущим исправлениям)
                 if j == 0:
-                    laplacian_y = (T0[i][j + 1] - 2 * T0[i][j]) / (dy ** 2)
+                    laplacian_y = (T_bottom - 2*T0[i][j] + T0[i][j+1]) / (dy**2)
                 elif j == m - 1:
-                    laplacian_y = (T0[i][j - 1] - 2 * T0[i][j]) / (dy ** 2)
+                    laplacian_y = (T0[i][j-1] - 2*T0[i][j] + T_top) / (dy**2)
                 else:
                     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
 
