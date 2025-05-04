@@ -145,8 +145,8 @@ def pennes(
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 1
-    dt = 0.1
+    dx = dy = 0.01
+    # dt = 0.1
 
     # Параметры уравнения Пеннеса
     lam = 0.251  # Теплопроводность (Вт/(м·°C))
@@ -158,10 +158,13 @@ def pennes(
     w_b = 0.008  # Перфузия
     Q_met = 8000  # Метаболизм
 
+    dt = dx * dx * dy * dy * rho * c / (2 * lam)
+    print(dt)
     # Генерация границ
     for i in range(0, len(X), 2):
         left_bound.extend([X[i]] * int(1 / dx))
         right_bound.extend([X[i + 1]] * int(1 / dx))
+
 
     x = np.arange(min(left_bound), max(right_bound) + 1, dx)
     y = np.arange(bottom_bound, top_bound + 1, dy)
@@ -172,6 +175,7 @@ def pennes(
     T0 = [[T_outside for _ in y] for _ in x]
     for i in range(n):
         for j in range(m):
+            print(f'итерация {i*j} / {m*n}')
             if left_bound[j] < x[i] < right_bound[j]:
                 T0[i][j] = 38.0  # Начальная температура внутри головы
             elif x[i] == left_bound[j]:
@@ -183,10 +187,10 @@ def pennes(
                 continue
 
     TT = {}
-    k = lam * dt / (rho * c)
+    k = lam * dt / (rho * c * dx * dy)
 
     while t <= t_max:
-        T1 = T0.copy()
+        T1 = np.copy(T0)
         for i in range(n):
             for j in range(m):
                 if x[i] < left_bound[j] or x[i] > right_bound[j]:
@@ -209,14 +213,12 @@ def pennes(
                 else:
                     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
 
+                laplacian = laplacian_x + laplacian_y
+
                 # Уравнение Пеннеса
                 perfusion = (w_b * rho_blood * cp_blood * (Ta - T0[i][j])) / (rho * c)
                 metabolism = Q_met / (rho * c)
-                T1[i][j] = T0[i][j] + dt * (
-                        (lam / (rho * c)) * (laplacian_x + laplacian_y) +
-                        perfusion +
-                        metabolism
-                )
+                T1[i][j] = T0[i][j] + k * laplacian + dt * (perfusion + metabolism)
 
         TT[round(t, 2)] = [row.copy() for row in T1]
         T0 = [row.copy() for row in T1]
