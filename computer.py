@@ -139,13 +139,13 @@ def pennes(
     T_top: float = 100,
 ) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
-    t_max = 30
+    t_max = 100
     t = 0
     left_bound = []
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 0.001
+    dx = dy = 0.1
     dt = 2
 
     # Параметры уравнения Пеннеса
@@ -166,13 +166,17 @@ def pennes(
         right_bound.extend([X[i + 1]] * int(1 / dx))
 
 
-    x = np.arange(min(left_bound), max(right_bound) + 1, dx)
-    y = np.arange(bottom_bound, top_bound + 1, dy)
+    x = np.round(np.arange(min(left_bound), max(right_bound) + 1, dx), 3)
+    y = np.round(np.arange(bottom_bound, top_bound + 1, dy), 3)
     n = len(x)
     m = len(y)
 
     # Инициализация температуры: 0 везде, кроме области головы
-    T0 = [[T_outside for _ in y] for _ in x]
+    # T0 = [[T_outside for _ in y] for _ in x]
+    T0 = np.full((n, m), T_outside, dtype=np.float64)
+
+    print('Инициализация температуры')
+
     for i in range(n):
         for j in range(m):
             # print(f'итерация {i*m+j} / {m*n}')
@@ -186,10 +190,10 @@ def pennes(
                 T0[i][j] = T_right  # Используем параметр T_right
                 continue
 
-    # print(T0)
+    print(T0)
 
     TT = {0: T0}
-    k = lam * dt / (rho * c * dx * dy)
+    k = lam * dt / (rho * c)
 
     while t <= t_max:
         T1 = np.copy(T0)
@@ -200,18 +204,18 @@ def pennes(
                     continue
 
                 # Лапласиан по X (проверка границ)
-                if i == 0:
-                    laplacian_x = (T0[i + 1][j] - 2 * T0[i][j]) / (dx ** 2)  # Правая разность
-                elif i == n - 1:
-                    laplacian_x = (T0[i - 1][j] - 2 * T0[i][j]) / (dx ** 2)  # Левая разность
+                if x[i] == left_bound[j]:
+                    laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
+                elif x[i] == right_bound[j]:
+                    laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
                 else:
                     laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)
 
                 # Лапласиан по Y (аналогично предыдущим исправлениям)
                 if j == 0:
-                    laplacian_y = (T_bottom - 2*T0[i][j] + T0[i][j+1]) / (dy**2)
+                    laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
                 elif j == m - 1:
-                    laplacian_y = (T0[i][j-1] - 2*T0[i][j] + T_top) / (dy**2)
+                    laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
                 else:
                     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
 

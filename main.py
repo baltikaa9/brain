@@ -196,7 +196,7 @@ class MainWindow(QMainWindow):
         T = []
 
         for temps in Ts.values():
-            T.append(temps[y][x])
+            T.append(temps[x][y])
 
         self.canvas_temperature.ax.plot(Ts.keys(), T)
 
