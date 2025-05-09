@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
         self.toolbar_layer = NavigationToolbar(self.canvas_layer, self)
         self.layout_layer.addWidget(self.toolbar_layer)
 
-        print(Ts.keys())
+        # print(Ts.keys())
 
         # Получаем последний момент времени
         last_time = max(Ts.keys())  # Находим максимальный ключ

@@ -145,8 +145,8 @@ def pennes(
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 0.01
-    # dt = 0.1
+    dx = dy = 0.001
+    dt = 2
 
     # Параметры уравнения Пеннеса
     lam = 0.251  # Теплопроводность (Вт/(м·°C))
@@ -158,8 +158,8 @@ def pennes(
     w_b = 0.008  # Перфузия
     Q_met = 8000  # Метаболизм
 
-    dt = dx * dx * dy * dy * rho * c / (2 * lam)
-    print(dt)
+    # dt = dx * dx * dy * dy * rho * c / (2 * lam) / 1000
+    # print(dt)
     # Генерация границ
     for i in range(0, len(X), 2):
         left_bound.extend([X[i]] * int(1 / dx))
@@ -175,7 +175,7 @@ def pennes(
     T0 = [[T_outside for _ in y] for _ in x]
     for i in range(n):
         for j in range(m):
-            print(f'итерация {i*j} / {m*n}')
+            # print(f'итерация {i*m+j} / {m*n}')
             if left_bound[j] < x[i] < right_bound[j]:
                 T0[i][j] = 38.0  # Начальная температура внутри головы
             elif x[i] == left_bound[j]:
@@ -186,9 +186,9 @@ def pennes(
                 T0[i][j] = T_right  # Используем параметр T_right
                 continue
 
-    print(T0)
+    # print(T0)
 
-    TT = {}
+    TT = {0: T0}
     k = lam * dt / (rho * c * dx * dy)
 
     while t <= t_max:
