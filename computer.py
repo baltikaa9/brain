@@ -139,14 +139,14 @@ def pennes(
     T_top: float = 100,
 ) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
-    t_max = 100
+    t_max = 60
     t = 0
     left_bound = []
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
     dx = dy = 0.1
-    dt = 2
+    dt = 0.5
 
     # Параметры уравнения Пеннеса
     lam = 0.251  # Теплопроводность (Вт/(м·°C))
