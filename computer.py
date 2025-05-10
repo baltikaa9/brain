@@ -139,14 +139,14 @@ def pennes(
     T_top: float = 100,
 ) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
-    t_max = 60
+    t_max = 30
     t = 0
     left_bound = []
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 0.1
-    dt = 0.5
+    dx = dy = 0.01
+    dt = 2
 
     # Параметры уравнения Пеннеса
     lam = 0.251  # Теплопроводность (Вт/(м·°C))
@@ -171,6 +171,8 @@ def pennes(
     n = len(x)
     m = len(y)
 
+    print('init start', n, m)
+
     # Инициализация температуры: 0 везде, кроме области головы
     # T0 = [[T_outside for _ in y] for _ in x]
     T0 = np.full((n, m), T_outside, dtype=np.float64)
@@ -190,7 +192,8 @@ def pennes(
                 T0[i][j] = T_right  # Используем параметр T_right
                 continue
 
-    print(T0)
+    print('init end')
+    # print(T0)
 
     TT = {0: T0}
     k = lam * dt / (rho * c)
@@ -200,22 +203,29 @@ def pennes(
         for i in range(n):
             for j in range(m):
                 if x[i] < left_bound[j] or x[i] > right_bound[j]:
-                    T1[i][j] = 0.0
                     continue
 
                 # Лапласиан по X (проверка границ)
                 if x[i] == left_bound[j]:
-                    laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
+                    # T1[i, j] = T_left
+                    continue
+                    # laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
                 elif x[i] == right_bound[j]:
-                    laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
+                    # laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
+                    # T1[i, j] = T_right
+                    continue
                 else:
                     laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)
 
                 # Лапласиан по Y (аналогично предыдущим исправлениям)
                 if j == 0:
-                    laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
+                    # laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
+                    T1[i, j] = T_bottom
+                    continue
                 elif j == m - 1:
-                    laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
+                    # laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
+                    T1[i, j] = T_top
+                    continue
                 else:
                     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
 
@@ -226,8 +236,8 @@ def pennes(
                 metabolism = Q_met / (rho * c)
                 T1[i][j] = T0[i][j] + k * laplacian + dt * (perfusion + metabolism)
 
-        TT[round(t, 2)] = [row.copy() for row in T1]
-        T0 = [row.copy() for row in T1]
+        TT[round(t, 2)] = T1.copy()
+        T0 = T1.copy()
         print(t)
         t += dt
 
