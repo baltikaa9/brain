@@ -145,7 +145,7 @@ def pennes(
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 0.01
+    dx = dy = 1
     dt = 2
 
     # Параметры уравнения Пеннеса
@@ -183,14 +183,18 @@ def pennes(
         for j in range(m):
             # print(f'итерация {i*m+j} / {m*n}')
             if left_bound[j] < x[i] < right_bound[j]:
-                T0[i][j] = 38.0  # Начальная температура внутри головы
+                if y[j] == bottom_bound:
+                    T0[i][j] = T_bottom
+                elif y[j] == top_bound:
+                    T0[i][j] = T_top
+                else:
+                    T0[i][j] = 38.0  # Начальная температура внутри головы
             elif x[i] == left_bound[j]:
                 T0[i][j] = T_left  # Используем параметр T_left
-                continue
             # Для правой границы
             elif x[i] == right_bound[j]:
                 T0[i][j] = T_right  # Используем параметр T_right
-                continue
+
 
     print('init end')
     # print(T0)
@@ -202,34 +206,39 @@ def pennes(
         T1 = np.copy(T0)
         for i in range(n):
             for j in range(m):
-                if x[i] < left_bound[j] or x[i] > right_bound[j]:
+                if x[i] <= left_bound[j] or x[i] >= right_bound[j]:
+                    continue
+                    
+                if y[j] <= bottom_bound or y[j] >= top_bound:
                     continue
 
                 # Лапласиан по X (проверка границ)
-                if x[i] == left_bound[j]:
-                    # T1[i, j] = T_left
-                    continue
-                    # laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
-                elif x[i] == right_bound[j]:
-                    # laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
-                    # T1[i, j] = T_right
-                    continue
-                else:
-                    laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)
+                # if x[i] == left_bound[j] or x[i] == right_bound[j]:
+                #     # T1[i, j] = T_left
+                #     continue
+                #     # laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
+                # elif x[i] == right_bound[j]:
+                #     # laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
+                #     # T1[i, j] = T_right
+                #     continue
+                # else:
+                #     laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)
 
                 # Лапласиан по Y (аналогично предыдущим исправлениям)
-                if j == 0:
-                    # laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
-                    T1[i, j] = T_bottom
-                    continue
-                elif j == m - 1:
-                    # laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
-                    T1[i, j] = T_top
-                    continue
-                else:
-                    laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
+                # if j == 0:
+                #     # laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
+                #     T1[i, j] = T_bottom
+                #     continue
+                # elif j == m - 1:
+                #     # laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
+                #     T1[i, j] = T_top
+                #     continue
+                # else:
+                #     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
 
-                laplacian = laplacian_x + laplacian_y
+                # laplacian = laplacian_x + laplacian_y
+                laplacian = (T0[i - 1, j] - 2 * T0[i, j] + T0[i + 1, j]) / (dx ** 2) \
+                            + (T0[i, j - 1] - 2 * T0[i, j] + T0[i, j + 1]) / (dy ** 2)
 
                 # Уравнение Пеннеса
                 perfusion = (w_b * rho_blood * cp_blood * (Ta - T0[i][j])) / (rho * c)
