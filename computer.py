@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 
 from draw import get_points
@@ -139,14 +141,14 @@ def pennes(
     T_top: float = 100,
 ) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
-    t_max = 30
+    t_max = 600
     t = 0
     left_bound = []
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
     dx = dy = 1
-    dt = 2
+    dt = 0.1
 
     # Параметры уравнения Пеннеса
     lam = 0.251  # Теплопроводность (Вт/(м·°C))
@@ -158,8 +160,6 @@ def pennes(
     w_b = 0.008  # Перфузия
     Q_met = 8000  # Метаболизм
 
-    # dt = dx * dx * dy * dy * rho * c / (2 * lam) / 1000
-    # print(dt)
     # Генерация границ
     for i in range(0, len(X), 2):
         left_bound.extend([X[i]] * int(1 / dx))
@@ -173,8 +173,6 @@ def pennes(
 
     print('init start', n, m)
 
-    # Инициализация температуры: 0 везде, кроме области головы
-    # T0 = [[T_outside for _ in y] for _ in x]
     T0 = np.full((n, m), T_outside, dtype=np.float64)
 
     print('Инициализация температуры')
@@ -200,7 +198,7 @@ def pennes(
     # print(T0)
 
     TT = {0: T0}
-    k = lam * dt / (rho * c)
+    k = lam * dt / (rho * c) * 1000000
 
     while t <= t_max:
         T1 = np.copy(T0)
@@ -212,31 +210,6 @@ def pennes(
                 if y[j] <= bottom_bound or y[j] >= top_bound:
                     continue
 
-                # Лапласиан по X (проверка границ)
-                # if x[i] == left_bound[j] or x[i] == right_bound[j]:
-                #     # T1[i, j] = T_left
-                #     continue
-                #     # laplacian_x = (T_left - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)  # Правая разность
-                # elif x[i] == right_bound[j]:
-                #     # laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T_right) / (dx ** 2)  # Левая разность
-                #     # T1[i, j] = T_right
-                #     continue
-                # else:
-                #     laplacian_x = (T0[i - 1][j] - 2 * T0[i][j] + T0[i + 1][j]) / (dx ** 2)
-
-                # Лапласиан по Y (аналогично предыдущим исправлениям)
-                # if j == 0:
-                #     # laplacian_y = (T_bottom - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
-                #     T1[i, j] = T_bottom
-                #     continue
-                # elif j == m - 1:
-                #     # laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T_top) / (dy ** 2)
-                #     T1[i, j] = T_top
-                #     continue
-                # else:
-                #     laplacian_y = (T0[i][j - 1] - 2 * T0[i][j] + T0[i][j + 1]) / (dy ** 2)
-
-                # laplacian = laplacian_x + laplacian_y
                 laplacian = (T0[i - 1, j] - 2 * T0[i, j] + T0[i + 1, j]) / (dx ** 2) \
                             + (T0[i, j - 1] - 2 * T0[i, j] + T0[i, j + 1]) / (dy ** 2)
 
@@ -247,7 +220,7 @@ def pennes(
 
         TT[round(t, 2)] = T1.copy()
         T0 = T1.copy()
-        print(t)
+        if abs(t - round(t)) < 1e-6: print(round(t))
         t += dt
 
     return TT
