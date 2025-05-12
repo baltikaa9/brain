@@ -139,21 +139,28 @@ def pennes(
     T_right: float = 100.0,
     T_bottom: float = 100,
     T_top: float = 100,
+    t_max: float = 10,
+    dx: float = 1,
+    dt: float = 0.1,
+    lam: float = 0.251,
+    c: float = 3150,
+    rho: float = 1108,
+    T_init: float = 38,
 ) -> dict[float, np.ndarray]:
     X, Y = get_points(open_image(layer, 'images'))
-    t_max = 600
+    # t_max = 10
     t = 0
     left_bound = []
     right_bound = []
     bottom_bound = min(Y)
     top_bound = max(Y)
-    dx = dy = 1
-    dt = 0.1
+    dy = dx
+    # dt = 0.1
 
     # Параметры уравнения Пеннеса
-    lam = 0.251  # Теплопроводность (Вт/(м·°C))
-    rho = 1108  # Плотность (кг/м³)
-    c = 3150  # Теплоемкость (Дж/(кг·°C))
+    # lam = 0.251  # Теплопроводность (Вт/(м·°C))
+    # rho = 1108  # Плотность (кг/м³)
+    # c = 3150  # Теплоемкость (Дж/(кг·°C))
     rho_blood = 1060  # Плотность крови
     cp_blood = 3617  # Теплоемкость крови
     Ta = 37.0  # Температура артерий
@@ -186,7 +193,7 @@ def pennes(
                 elif y[j] == top_bound:
                     T0[i][j] = T_top
                 else:
-                    T0[i][j] = 38.0  # Начальная температура внутри головы
+                    T0[i][j] = T_init  # Начальная температура внутри головы
             elif x[i] == left_bound[j]:
                 T0[i][j] = T_left  # Используем параметр T_left
             # Для правой границы

@@ -128,6 +128,13 @@ class MainWindow(QMainWindow):
         T_top = float(self.ui.lineEdit_T_top.text())
         T_bottom = float(self.ui.lineEdit_T_bottom.text())
         T_outside = float(self.ui.lineEdit_T_outside.text())
+        t_max = float(self.ui.lineEdit_6.text())
+        dx = float(self.ui.lineEdit_7.text())
+        dt = float(self.ui.lineEdit_8.text())
+        lam = float(self.ui.lineEdit.text())
+        c = float(self.ui.lineEdit_2.text())
+        rho = float(self.ui.lineEdit_3.text())
+        T_init = float(self.ui.lineEdit_4.text())
 
         # Вызов функции с новыми параметрами
         Ts = pennes(
@@ -136,7 +143,14 @@ class MainWindow(QMainWindow):
             T_right=T_right,
             T_top=T_top,
             T_bottom=T_bottom,
-            T_outside=T_outside
+            T_outside=T_outside,
+            t_max=t_max,
+            dx=dx,
+            dt=dt,
+            lam=lam,
+            c=c,
+            rho=rho,
+            T_init=T_init,
         )
         # Ts = thermal_conductivity(self.image)
         # Ts = pennes(self.image)
