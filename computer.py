@@ -133,7 +133,7 @@ def thermal_conductivity(layer: int) -> dict[list[list[float]]]:
     return TTT
 
 def pennes(
-    layer: int,
+    points: tuple[list[float], list[float]],
     T_outside: float = 0.0,
     T_left: float = 100.0,
     T_right: float = 100.0,
@@ -147,7 +147,7 @@ def pennes(
     rho: float = 1108,
     T_init: float = 38,
 ) -> dict[float, np.ndarray]:
-    X, Y = get_points(open_image(layer, 'images'))
+    X, Y = points
     # t_max = 10
     t = 0
     left_bound = []

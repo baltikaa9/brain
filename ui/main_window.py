@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.0
+## Created by: Qt User Interface Compiler version 6.9.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -41,92 +41,92 @@ class Ui_MainWindow(object):
         self.label_2 = QLabel(self.widget_3)
         self.label_2.setObjectName(u"label_2")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_2)
 
         self.lineEdit = QLineEdit(self.widget_3)
         self.lineEdit.setObjectName(u"lineEdit")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lineEdit)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit)
 
         self.label_3 = QLabel(self.widget_3)
         self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_3)
 
         self.lineEdit_2 = QLineEdit(self.widget_3)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.lineEdit_2)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.lineEdit_2)
 
         self.label_4 = QLabel(self.widget_3)
         self.label_4.setObjectName(u"label_4")
 
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_4)
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_4)
 
         self.lineEdit_3 = QLineEdit(self.widget_3)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.lineEdit_3)
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.lineEdit_3)
 
         self.label_5 = QLabel(self.widget_3)
         self.label_5.setObjectName(u"label_5")
 
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_5)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_5)
 
         self.lineEdit_4 = QLineEdit(self.widget_3)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.lineEdit_4)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.lineEdit_4)
 
         self.label_T_left = QLabel(self.widget_3)
         self.label_T_left.setObjectName(u"label_T_left")
 
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_T_left)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_T_left)
 
         self.lineEdit_T_left = QLineEdit(self.widget_3)
         self.lineEdit_T_left.setObjectName(u"lineEdit_T_left")
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.lineEdit_T_left)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_left)
 
         self.label_T_right = QLabel(self.widget_3)
         self.label_T_right.setObjectName(u"label_T_right")
 
-        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_T_right)
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.label_T_right)
 
         self.lineEdit_T_right = QLineEdit(self.widget_3)
         self.lineEdit_T_right.setObjectName(u"lineEdit_T_right")
 
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.lineEdit_T_right)
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_right)
 
         self.label_T_top = QLabel(self.widget_3)
         self.label_T_top.setObjectName(u"label_T_top")
 
-        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_T_top)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.label_T_top)
 
         self.lineEdit_T_top = QLineEdit(self.widget_3)
         self.lineEdit_T_top.setObjectName(u"lineEdit_T_top")
 
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.lineEdit_T_top)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_top)
 
         self.label_T_bottom = QLabel(self.widget_3)
         self.label_T_bottom.setObjectName(u"label_T_bottom")
 
-        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_T_bottom)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.label_T_bottom)
 
         self.lineEdit_T_bottom = QLineEdit(self.widget_3)
         self.lineEdit_T_bottom.setObjectName(u"lineEdit_T_bottom")
 
-        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.lineEdit_T_bottom)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_bottom)
 
         self.label_T_outside = QLabel(self.widget_3)
         self.label_T_outside.setObjectName(u"label_T_outside")
 
-        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.label_T_outside)
+        self.formLayout.setWidget(8, QFormLayout.ItemRole.LabelRole, self.label_T_outside)
 
         self.lineEdit_T_outside = QLineEdit(self.widget_3)
         self.lineEdit_T_outside.setObjectName(u"lineEdit_T_outside")
 
-        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.lineEdit_T_outside)
+        self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_outside)
 
 
         self.verticalLayout_4.addWidget(self.widget_3)
@@ -145,6 +145,11 @@ class Ui_MainWindow(object):
         self.pushButton_3.setObjectName(u"pushButton_3")
 
         self.verticalLayout_5.addWidget(self.pushButton_3)
+
+        self.lineEdit_data_path = QLineEdit(self.frame_buttons)
+        self.lineEdit_data_path.setObjectName(u"lineEdit_data_path")
+
+        self.verticalLayout_5.addWidget(self.lineEdit_data_path)
 
         self.pushButton_4 = QPushButton(self.frame_buttons)
         self.pushButton_4.setObjectName(u"pushButton_4")
@@ -175,32 +180,32 @@ class Ui_MainWindow(object):
         self.label_9 = QLabel(self.widget_6)
         self.label_9.setObjectName(u"label_9")
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_9)
+        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_9)
 
         self.lineEdit_6 = QLineEdit(self.widget_6)
         self.lineEdit_6.setObjectName(u"lineEdit_6")
 
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.lineEdit_6)
+        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit_6)
 
         self.label_10 = QLabel(self.widget_6)
         self.label_10.setObjectName(u"label_10")
 
-        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_10)
+        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_10)
 
         self.lineEdit_7 = QLineEdit(self.widget_6)
         self.lineEdit_7.setObjectName(u"lineEdit_7")
 
-        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.lineEdit_7)
+        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.FieldRole, self.lineEdit_7)
 
         self.label_11 = QLabel(self.widget_6)
         self.label_11.setObjectName(u"label_11")
 
-        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_11)
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_11)
 
         self.lineEdit_8 = QLineEdit(self.widget_6)
         self.lineEdit_8.setObjectName(u"lineEdit_8")
 
-        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.lineEdit_8)
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.lineEdit_8)
 
 
         self.verticalLayout_7.addWidget(self.widget_6)
@@ -328,7 +333,7 @@ class Ui_MainWindow(object):
         self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u043f\u0443\u0441\u043a", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f (\u0441)", None))
-        self.lineEdit_6.setText(QCoreApplication.translate("MainWindow", u"30", None))
+        self.lineEdit_6.setText(QCoreApplication.translate("MainWindow", u"10", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0437\u043c\u0435\u0440 \u0448\u0430\u0433\u0430 \u043f\u043e \u043f\u0440\u043e\u0441\u0442\u0440\u0430\u043d\u0441\u0442\u0432\u0443", None))
         self.lineEdit_7.setText(QCoreApplication.translate("MainWindow", u"1", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0437\u043c\u0435\u0440 \u0448\u0430\u0433\u0430 \u043f\u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0438", None))

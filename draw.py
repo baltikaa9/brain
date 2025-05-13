@@ -10,7 +10,7 @@ def open_image(i: int, folder_path: str) -> np.ndarray:
     data = np.stack(img, axis=0)  # преобразование в массив
     return data
 
-def get_points(data: np.ndarray, empty=True):
+def get_points(data: np.ndarray, empty=True) -> tuple[list[float], list[float]]:
     X, Y = [], []
 
     for y in range(360):  # фильтрация точек

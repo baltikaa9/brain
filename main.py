@@ -1,10 +1,16 @@
+import csv
+import os
 import sys
 import matplotlib
 import numpy as np
+from PySide6.QtWidgets import QFileDialog
+from PySide6.QtWidgets import QMessageBox
 
 from computer import pennes
 from draw import draw3d, draw3dдырявое, draw2d
 from computer import thermal_conductivity
+from draw import get_points
+from draw import open_image
 from ui.main_window import Ui_MainWindow
 
 matplotlib.use('Qt5Agg')
@@ -70,6 +76,8 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_right.clicked.connect(self.__next)
         self.ui.pushButton_start.clicked.connect(self.__start)
         self.ui.pushButton_plot_temp.clicked.connect(self.__plot_temp)
+        self.ui.pushButton_3.clicked.connect(self.__show_file_dialog)
+        self.ui.pushButton_4.clicked.connect(self.__export_csv)
 
 
         # draw3d(132, self.canvas_geometry.ax, 'images')
@@ -136,9 +144,15 @@ class MainWindow(QMainWindow):
         rho = float(self.ui.lineEdit_3.text())
         T_init = float(self.ui.lineEdit_4.text())
 
+        if not os.path.isdir(self.ui.lineEdit_data_path.text()):
+            QMessageBox.warning(self, 'Ошибка', 'Выбранной директории не существует')
+            return
+
+        points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()))
+
         # Вызов функции с новыми параметрами
         Ts = pennes(
-            layer=self.image,
+            points=points,
             T_left=T_left,
             T_right=T_right,
             T_top=T_top,
@@ -213,6 +227,34 @@ class MainWindow(QMainWindow):
             T.append(temps[x][y])
 
         self.canvas_temperature.ax.plot(Ts.keys(), T)
+
+    def __show_file_dialog(self):
+        directory = QFileDialog.getExistingDirectory()
+        self.ui.lineEdit_data_path.setText(directory)
+
+        # draw2d(self.image, self.canvas_geometry.ax, directory)
+
+    def __export_csv(self):
+        if not os.path.isdir(directory := self.ui.lineEdit_data_path.text()):
+            QMessageBox.warning(self, 'Ошибка', 'Выбранной директории не существует')
+            return
+
+        file_path = QFileDialog.getSaveFileName(
+            parent=self,
+            caption='Select a file',
+            dir=os.getcwd(),
+            filter='(*.csv)',
+        )[0]
+
+        with open(file_path, 'w', newline='') as file:
+            writer = csv.writer(file, delimiter=';')
+            writer.writerow(('x', 'y', 'z'))
+            for z in range(1, 133):
+                x, y = get_points(open_image(self.image, directory))
+                for i in range(len(x)):
+                    print(i)
+                    writer.writerow((x[i], y[i], z))
+
 
 
 if __name__ == '__main__':
