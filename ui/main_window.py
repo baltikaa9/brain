@@ -31,100 +31,125 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.groupBox_2 = QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(u"groupBox_2")
+        self.groupBox_2.setMinimumSize(QSize(0, 250))
         self.groupBox_2.setMaximumSize(QSize(16777215, 200))
         self.verticalLayout_4 = QVBoxLayout(self.groupBox_2)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.widget_3 = QWidget(self.groupBox_2)
         self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setMinimumSize(QSize(0, 200))
         self.formLayout = QFormLayout(self.widget_3)
         self.formLayout.setObjectName(u"formLayout")
         self.label_2 = QLabel(self.widget_3)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_2)
 
         self.lineEdit = QLineEdit(self.widget_3)
         self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit)
 
         self.label_3 = QLabel(self.widget_3)
         self.label_3.setObjectName(u"label_3")
+        self.label_3.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_3)
 
         self.lineEdit_2 = QLineEdit(self.widget_3)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
+        self.lineEdit_2.setSizePolicy(sizePolicy)
+        self.lineEdit_2.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.lineEdit_2)
 
         self.label_4 = QLabel(self.widget_3)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_4)
 
         self.lineEdit_3 = QLineEdit(self.widget_3)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.lineEdit_3.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.lineEdit_3)
 
         self.label_5 = QLabel(self.widget_3)
         self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_5)
 
         self.lineEdit_4 = QLineEdit(self.widget_3)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.lineEdit_4.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.lineEdit_4)
 
         self.label_T_left = QLabel(self.widget_3)
         self.label_T_left.setObjectName(u"label_T_left")
+        self.label_T_left.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_T_left)
 
         self.lineEdit_T_left = QLineEdit(self.widget_3)
         self.lineEdit_T_left.setObjectName(u"lineEdit_T_left")
+        self.lineEdit_T_left.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_left)
 
         self.label_T_right = QLabel(self.widget_3)
         self.label_T_right.setObjectName(u"label_T_right")
+        self.label_T_right.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.label_T_right)
 
         self.lineEdit_T_right = QLineEdit(self.widget_3)
         self.lineEdit_T_right.setObjectName(u"lineEdit_T_right")
+        self.lineEdit_T_right.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_right)
 
         self.label_T_top = QLabel(self.widget_3)
         self.label_T_top.setObjectName(u"label_T_top")
+        self.label_T_top.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.label_T_top)
 
         self.lineEdit_T_top = QLineEdit(self.widget_3)
         self.lineEdit_T_top.setObjectName(u"lineEdit_T_top")
+        self.lineEdit_T_top.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_top)
 
         self.label_T_bottom = QLabel(self.widget_3)
         self.label_T_bottom.setObjectName(u"label_T_bottom")
+        self.label_T_bottom.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.label_T_bottom)
 
         self.lineEdit_T_bottom = QLineEdit(self.widget_3)
         self.lineEdit_T_bottom.setObjectName(u"lineEdit_T_bottom")
+        self.lineEdit_T_bottom.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_bottom)
 
         self.label_T_outside = QLabel(self.widget_3)
         self.label_T_outside.setObjectName(u"label_T_outside")
+        self.label_T_outside.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(8, QFormLayout.ItemRole.LabelRole, self.label_T_outside)
 
         self.lineEdit_T_outside = QLineEdit(self.widget_3)
         self.lineEdit_T_outside.setObjectName(u"lineEdit_T_outside")
+        self.lineEdit_T_outside.setMinimumSize(QSize(0, 20))
 
         self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.lineEdit_T_outside)
 
@@ -245,6 +270,7 @@ class Ui_MainWindow(object):
 
         self.groupBox_4 = QGroupBox(self.centralwidget)
         self.groupBox_4.setObjectName(u"groupBox_4")
+        self.groupBox_4.setMaximumSize(QSize(16777215, 400))
         self.verticalLayout_3 = QVBoxLayout(self.groupBox_4)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.widget_temperature = QWidget(self.groupBox_4)
