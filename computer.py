@@ -186,19 +186,23 @@ def pennes(
 
     for i in range(n):
         for j in range(m):
-            # print(f'итерация {i*m+j} / {m*n}')
             if left_bound[j] < x[i] < right_bound[j]:
-                if y[j] == bottom_bound:
-                    T0[i][j] = T_bottom
-                elif y[j] == top_bound:
-                    T0[i][j] = T_top
-                else:
-                    T0[i][j] = T_init  # Начальная температура внутри головы
-            elif x[i] == left_bound[j]:
-                T0[i][j] = T_left  # Используем параметр T_left
-            # Для правой границы
-            elif x[i] == right_bound[j]:
-                T0[i][j] = T_right  # Используем параметр T_right
+                T0[i][j] = T_init
+            else:
+                T0[i][j] = T_outside
+            # print(f'итерация {i*m+j} / {m*n}')
+            # if left_bound[j] < x[i] < right_bound[j]:
+            #     if y[j] == bottom_bound:
+            #         T0[i][j] = T_bottom
+            #     elif y[j] == top_bound:
+            #         T0[i][j] = T_top
+            #     else:
+            #         T0[i][j] = T_init  # Начальная температура внутри головы
+            # elif x[i] == left_bound[j]:
+            #     T0[i][j] = T_left  # Используем параметр T_left
+            # # Для правой границы
+            # elif x[i] == right_bound[j]:
+            #     T0[i][j] = T_right  # Используем параметр T_right
 
 
     print('init end')
@@ -224,6 +228,24 @@ def pennes(
                 perfusion = (w_b * rho_blood * cp_blood * (Ta - T0[i][j])) / (rho * c)
                 metabolism = Q_met / (rho * c)
                 T1[i][j] = T0[i][j] + k * laplacian + dt * (perfusion + metabolism)
+
+        for j in range(m):
+            # левая граница: i=0
+            if left_bound[j] <= x[0] <= right_bound[j]:
+                T1[0, j] = T1[1, j]
+
+            # правая граница: i = n-1
+            if left_bound[j] <= x[n - 1] <= right_bound[j]:
+                T1[n - 1, j] = T1[n - 2, j]
+
+        for i in range(n):
+            # нижняя граница: j=0
+            if left_bound[0] < x[i] < right_bound[0]:
+                T1[i, 0] = T1[i, 1]
+
+            # верхняя граница: j = m-1
+            if left_bound[m - 1] < x[i] < right_bound[m - 1]:
+                T1[i, m - 1] = T1[i, m - 2]
 
         TT[round(t, 2)] = T1.copy()
         T0 = T1.copy()

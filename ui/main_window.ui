@@ -469,150 +469,150 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_T_left">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Температура слева (°C)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_T_left">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>100.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_T_right">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Температура справа (°C)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEdit_T_right">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>100.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_T_top">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Температура сверху (°C)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEdit_T_top">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>100.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="label_T_bottom">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Температура снизу (°C)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEdit_T_bottom">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>100.0</string>
-            </property>
-           </widget>
-          </item>
+<!--          <item row="4" column="0">-->
+<!--           <widget class="QLabel" name="label_T_left">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>Температура слева (°C)</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="4" column="1">-->
+<!--           <widget class="QLineEdit" name="lineEdit_T_left">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>100.0</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="5" column="0">-->
+<!--           <widget class="QLabel" name="label_T_right">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>Температура справа (°C)</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="5" column="1">-->
+<!--           <widget class="QLineEdit" name="lineEdit_T_right">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>100.0</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="6" column="0">-->
+<!--           <widget class="QLabel" name="label_T_top">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>Температура сверху (°C)</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="6" column="1">-->
+<!--           <widget class="QLineEdit" name="lineEdit_T_top">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>100.0</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="7" column="0">-->
+<!--           <widget class="QLabel" name="label_T_bottom">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>Температура снизу (°C)</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
+<!--          <item row="7" column="1">-->
+<!--           <widget class="QLineEdit" name="lineEdit_T_bottom">-->
+<!--            <property name="minimumSize">-->
+<!--             <size>-->
+<!--              <width>0</width>-->
+<!--              <height>20</height>-->
+<!--             </size>-->
+<!--            </property>-->
+<!--            <property name="font">-->
+<!--             <font>-->
+<!--              <pointsize>11</pointsize>-->
+<!--             </font>-->
+<!--            </property>-->
+<!--            <property name="text">-->
+<!--             <string>100.0</string>-->
+<!--            </property>-->
+<!--           </widget>-->
+<!--          </item>-->
           <item row="8" column="0">
            <widget class="QLabel" name="label_T_outside">
             <property name="minimumSize">

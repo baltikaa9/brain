@@ -53,14 +53,14 @@ class MainWindow(QMainWindow):
         self.layout_geometry.addWidget(self.canvas_geometry)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
-        self.canvas_layer = MplCanvas(self)
+        self.canvas_layer = MplCanvas(self, width=5, height=4)
         self.toolbar_layer = NavigationToolbar(self.canvas_layer, self)
 
         self.layout_layer = QVBoxLayout()
         self.layout_layer.addWidget(self.canvas_layer)
         self.layout_layer.addWidget(self.toolbar_layer)
 
-        self.canvas_temperature = MplCanvas(self)
+        self.canvas_temperature = MplCanvas(self, width=5, height=4)
         self.toolbar_temperature = NavigationToolbar(self.canvas_temperature, self)
 
         self.layout_temperature = QVBoxLayout()
@@ -137,10 +137,10 @@ class MainWindow(QMainWindow):
         # self.show()
 
     def __start(self):
-        T_left = float(self.ui.lineEdit_T_left.text())
-        T_right = float(self.ui.lineEdit_T_right.text())
-        T_top = float(self.ui.lineEdit_T_top.text())
-        T_bottom = float(self.ui.lineEdit_T_bottom.text())
+        # T_left = float(self.ui.lineEdit_T_left.text())
+        # T_right = float(self.ui.lineEdit_T_right.text())
+        # T_top = float(self.ui.lineEdit_T_top.text())
+        # T_bottom = float(self.ui.lineEdit_T_bottom.text())
         T_outside = float(self.ui.lineEdit_T_outside.text())
         t_max = float(self.ui.lineEdit_6.text())
         dx = float(self.ui.lineEdit_7.text())
@@ -159,10 +159,10 @@ class MainWindow(QMainWindow):
         # Вызов функции с новыми параметрами
         Ts = pennes(
             points=points,
-            T_left=T_left,
-            T_right=T_right,
-            T_top=T_top,
-            T_bottom=T_bottom,
+            # T_left=T_left,
+            # T_right=T_right,
+            # T_top=T_top,
+            # T_bottom=T_bottom,
             T_outside=T_outside,
             t_max=t_max,
             dx=dx,
