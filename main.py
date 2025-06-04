@@ -200,7 +200,7 @@ class MainWindow(QMainWindow):
         img = self.canvas_layer.ax.imshow(last_temp.T, origin='lower')
         self.canvas_layer.figure.colorbar(img, label='Температура (°C)')
         self.canvas_layer.ax.set_xlabel('X', fontsize=10)
-        self.canvas_layer.ax.set_ybel('Y', fontsize=10)
+        self.canvas_layer.ax.set_ylabel('Y', fontsize=10)
         self.canvas_layer.ax.set_title(f'Время: {last_time} с')
         # plt.show()
         # self.ui.widget_layer.show()
