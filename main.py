@@ -43,6 +43,8 @@ class MainWindow(QMainWindow):
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100,
                                          title=f'Геометрия (слой {self.image})')
         # canvas_geometry.ax.plot([0,1,2,3,4], [10,1,20,3,40])
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
 
         # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
@@ -101,6 +103,8 @@ class MainWindow(QMainWindow):
         self.toolbar_geometry.hide()
 
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
         self.layout_geometry.addWidget(self.canvas_geometry)
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
@@ -122,6 +126,8 @@ class MainWindow(QMainWindow):
 
         # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
         self.layout_geometry.addWidget(self.canvas_geometry)
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
@@ -193,6 +199,8 @@ class MainWindow(QMainWindow):
         # temp = self.canvas_layer.ax.imshow(Ts[list(Ts.keys())[-1]])
         img = self.canvas_layer.ax.imshow(last_temp.T, origin='lower')
         self.canvas_layer.figure.colorbar(img, label='Температура (°C)')
+        self.canvas_layer.ax.set_xlabel('X', fontsize=10)
+        self.canvas_layer.ax.set_ybel('Y', fontsize=10)
         self.canvas_layer.ax.set_title(f'Время: {last_time} с')
         # plt.show()
         # self.ui.widget_layer.show()
@@ -227,6 +235,9 @@ class MainWindow(QMainWindow):
             T.append(temps[x][y])
 
         self.canvas_temperature.ax.plot(Ts.keys(), T)
+
+        self.canvas_temperature.ax.set_xlabel('t', fontsize=10)
+        self.canvas_temperature.ax.set_ylabel("T", fontsize=10)
 
     def __show_file_dialog(self):
         directory = QFileDialog.getExistingDirectory()
