@@ -1,25 +1,28 @@
 import csv
 import os
 import sys
+
 import matplotlib
 import numpy as np
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QApplication
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
+from matplotlib.figure import Figure
 
 from computer import pennes
-from draw import draw3d, draw3dдырявое, draw2d
-from computer import thermal_conductivity
+from draw import draw2d
 from draw import get_points
 from draw import open_image
 from ui.main_window import Ui_MainWindow
 
 matplotlib.use('Qt5Agg')
 
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QApplication, QFrame
+font = {
+    'size': 16,
+}
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
-from matplotlib.figure import Figure
-
+matplotlib.rc('font', **font)
 
 class MplCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, num=1, width=5, height=4, dpi=100, projection=None, title=None):
@@ -39,14 +42,11 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title='Геометрия')
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100,
                                          title=f'Геометрия (слой {self.image})')
-        # canvas_geometry.ax.plot([0,1,2,3,4], [10,1,20,3,40])
-        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
-        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=16)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=16)
 
-        # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
 
         self.layout_geometry = QVBoxLayout()
@@ -67,12 +67,9 @@ class MainWindow(QMainWindow):
         self.layout_temperature.addWidget(self.canvas_temperature)
         self.layout_temperature.addWidget(self.toolbar_temperature)
 
-        # Create a placeholder widget to hold our toolbar and canvas.
-        # widget = QWidget()
         self.ui.widget_geometry.setLayout(self.layout_geometry)
         self.ui.widget_layer.setLayout(self.layout_layer)
         self.ui.widget_temperature.setLayout(self.layout_temperature)
-        # self.setCentralWidget(widget)
 
         self.ui.pushButton_left.clicked.connect(self.__prev)
         self.ui.pushButton_right.clicked.connect(self.__next)
@@ -81,14 +78,7 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.__show_file_dialog)
         self.ui.pushButton_4.clicked.connect(self.__export_csv)
 
-
-        # draw3d(132, self.canvas_geometry.ax, 'images')
-        # draw3dдырявое(132, self.canvas_geometry.ax, 'images')
-
         draw2d(self.image, self.canvas_geometry.ax, 'images')
-
-
-        # self.show()
 
     def __next(self):
         if self.image >= 132:
@@ -103,14 +93,13 @@ class MainWindow(QMainWindow):
         self.toolbar_geometry.hide()
 
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
-        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
-        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=16)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=16)
         self.layout_geometry.addWidget(self.canvas_geometry)
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
         draw2d(self.image, self.canvas_geometry.ax, 'images')
-        # self.show()
 
     def __prev(self):
         if self.image <= 1:
@@ -124,23 +113,16 @@ class MainWindow(QMainWindow):
         self.canvas_geometry.hide()
         self.toolbar_geometry.hide()
 
-        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
-        self.canvas_geometry.ax.set_xlabel('X', fontsize=10)
-        self.canvas_geometry.ax.set_ylabel('Y', fontsize=10)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=16)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=16)
         self.layout_geometry.addWidget(self.canvas_geometry)
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
         draw2d(self.image, self.canvas_geometry.ax, 'images')
-        # draw3dдырявое(132, self.canvas_geometry.ax, 'images')
-        # self.show()
 
     def __start(self):
-        # T_left = float(self.ui.lineEdit_T_left.text())
-        # T_right = float(self.ui.lineEdit_T_right.text())
-        # T_top = float(self.ui.lineEdit_T_top.text())
-        # T_bottom = float(self.ui.lineEdit_T_bottom.text())
         T_outside = float(self.ui.lineEdit_T_outside.text())
         t_max = float(self.ui.lineEdit_6.text())
         dx = float(self.ui.lineEdit_7.text())
@@ -156,13 +138,8 @@ class MainWindow(QMainWindow):
 
         points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()))
 
-        # Вызов функции с новыми параметрами
         Ts = pennes(
             points=points,
-            # T_left=T_left,
-            # T_right=T_right,
-            # T_top=T_top,
-            # T_bottom=T_bottom,
             T_outside=T_outside,
             t_max=t_max,
             dx=dx,
@@ -172,8 +149,6 @@ class MainWindow(QMainWindow):
             rho=rho,
             T_init=T_init,
         )
-        # Ts = thermal_conductivity(self.image)
-        # Ts = pennes(self.image)
 
         self.Ts = Ts
 
@@ -184,7 +159,6 @@ class MainWindow(QMainWindow):
         self.canvas_layer.hide()
         self.toolbar_layer.hide()
 
-        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.canvas_layer = MplCanvas(self)  # (self.fig)
         self.layout_layer.addWidget(self.canvas_layer)
         self.toolbar_layer = NavigationToolbar(self.canvas_layer, self)
@@ -196,15 +170,11 @@ class MainWindow(QMainWindow):
         last_time = max(Ts.keys())  # Находим максимальный ключ
         last_temp = np.array(Ts[last_time])  # Берём последний температурный массив
 
-        # temp = self.canvas_layer.ax.imshow(Ts[list(Ts.keys())[-1]])
         img = self.canvas_layer.ax.imshow(last_temp.T, origin='lower')
         self.canvas_layer.figure.colorbar(img, label='Температура (°C)')
-        self.canvas_layer.ax.set_xlabel('X', fontsize=10)
-        self.canvas_layer.ax.set_ylabel('Y', fontsize=10)
+        self.canvas_layer.ax.set_xlabel('X', fontsize=16)
+        self.canvas_layer.ax.set_ylabel('Y', fontsize=16)
         self.canvas_layer.ax.set_title(f'Время: {last_time} с')
-        # plt.show()
-        # self.ui.widget_layer.show()
-        # self.ui.widget_temperature.show()
 
     def __plot_temp(self):
         try:
@@ -220,7 +190,6 @@ class MainWindow(QMainWindow):
         self.canvas_temperature.hide()
         self.toolbar_temperature.hide()
 
-        # self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100, title=f'Геометрия (слой {self.image})')  # (self.fig)
         self.canvas_temperature = MplCanvas(self)  # (self.fig)
         self.layout_temperature.addWidget(self.canvas_temperature)
         self.toolbar_temperature = NavigationToolbar(self.canvas_temperature, self)
@@ -236,14 +205,12 @@ class MainWindow(QMainWindow):
 
         self.canvas_temperature.ax.plot(Ts.keys(), T)
 
-        self.canvas_temperature.ax.set_xlabel('t', fontsize=10)
-        self.canvas_temperature.ax.set_ylabel("T", fontsize=10)
+        self.canvas_temperature.ax.set_xlabel('t', fontsize=16)
+        self.canvas_temperature.ax.set_ylabel("T", fontsize=16)
 
     def __show_file_dialog(self):
         directory = QFileDialog.getExistingDirectory()
         self.ui.lineEdit_data_path.setText(directory)
-
-        # draw2d(self.image, self.canvas_geometry.ax, directory)
 
     def __export_csv(self):
         if not os.path.isdir(directory := self.ui.lineEdit_data_path.text()):
@@ -265,7 +232,6 @@ class MainWindow(QMainWindow):
                 for i in range(len(x)):
                     print(i)
                     writer.writerow((x[i], y[i], z))
-
 
 
 if __name__ == '__main__':
