@@ -46,6 +46,7 @@ def pennes(
     Ta = 37.0  # Температура артерий
     w_b = 0.008  # Перфузия
     Q_met = 8000  # Метаболизм
+    cf = 1000000
 
     # Генерация границ
     for i in range(0, len(X), 2):
@@ -74,7 +75,7 @@ def pennes(
     print('init end')
 
     TT = {0: T0}
-    k = lam * dt / (rho * c) * 1000000
+    k = lam * dt / (rho * c) * cf
 
     while t <= t_max:
         T1 = np.copy(T0)

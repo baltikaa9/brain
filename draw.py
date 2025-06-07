@@ -7,6 +7,9 @@ from matplotlib import cm
 
 def open_image(i: int, folder_path: str) -> np.ndarray:
     img = cv2.imread(f'{folder_path}/image({i}).png', 0)  # чтение изображений
+    if img is None:
+        raise FileNotFoundError(f'Директория должна содержать изображения')
+
     data = np.stack(img, axis=0)  # преобразование в массив
     return data
 
@@ -44,11 +47,13 @@ def get_points(data: np.ndarray, empty=True) -> tuple[list[float], list[float]]:
 
 
 # fig = plt.figure()
-def draw2d(i: int, ax, folder_path):
+def draw2d(i: int, ax, points: tuple[list[float], list[float]]):
     # print(i, ax, folder_path)
-    data = open_image(i, folder_path)
+    # data = open_image(i, folder_path)
 
-    X, Y = get_points(data, False)
+    # X, Y = get_points(data, False)
+
+    X, Y = points
 
     ax.scatter(X, Y[::-1], color='black')
     # ax.triplot(x, y[::-1], color='black')

@@ -34,16 +34,18 @@ class MplCanvas(FigureCanvasQTAgg):
 
 
 class MainWindow(QMainWindow):
+    DIRECTORY_IS_NOT_SPECIFIED = 'Не выбрана директория'
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.image = 1
+        self.points = None
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100,
-                                         title=f'Геометрия (слой {self.image})')
+        self.canvas_geometry = MplCanvas(self, num=1, width=5)
         self.canvas_geometry.ax.set_xlabel('X', fontsize=16)
         self.canvas_geometry.ax.set_ylabel('Y', fontsize=16)
 
@@ -78,10 +80,10 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.__show_file_dialog)
         self.ui.pushButton_4.clicked.connect(self.__export_csv)
 
-        draw2d(self.image, self.canvas_geometry.ax, 'images')
+        # draw2d(self.image, self.canvas_geometry.ax, 'images')
 
     def __next(self):
-        if self.image >= 132:
+        if self.image >= 132 or not self.points:
             return
 
         self.image += 1
@@ -99,10 +101,17 @@ class MainWindow(QMainWindow):
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
-        draw2d(self.image, self.canvas_geometry.ax, 'images')
+        # draw2d(self.image, self.canvas_geometry.ax, 'images')
+
+        # if not os.path.isdir(self.ui.lineEdit_data_path.text()):
+        #     QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
+        #     return
+
+        if self.points:
+            draw2d(self.image, self.canvas_geometry.ax, self.points)
 
     def __prev(self):
-        if self.image <= 1:
+        if self.image <= 1 or not self.points:
             return
 
         self.image -= 1
@@ -120,20 +129,25 @@ class MainWindow(QMainWindow):
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
-        draw2d(self.image, self.canvas_geometry.ax, 'images')
+        # draw2d(self.image, self.canvas_geometry.ax, 'images')
+
+        # if not os.path.isdir(self.ui.lineEdit_data_path.text()):
+        #     QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
+        #     return
+        draw2d(self.image, self.canvas_geometry.ax, self.points)
 
     def __start(self):
-        T_outside = float(self.ui.lineEdit_T_outside.text())
-        t_max = float(self.ui.lineEdit_6.text())
-        dx = float(self.ui.lineEdit_7.text())
-        dt = float(self.ui.lineEdit_8.text())
-        lam = float(self.ui.lineEdit.text())
-        c = float(self.ui.lineEdit_2.text())
-        rho = float(self.ui.lineEdit_3.text())
-        T_init = float(self.ui.lineEdit_4.text())
+        t_max = self.ui.doubleSpinBox_time.value()
+        dx = self.ui.doubleSpinBox_dx.value()
+        dt = self.ui.doubleSpinBox_dt.value()
+        lam = self.ui.doubleSpinBox_lam.value()
+        c = self.ui.doubleSpinBox_c.value()
+        rho = self.ui.doubleSpinBox_rho.value()
+        T_init = self.ui.doubleSpinBox_T_init.value()
+        T_outside = self.ui.doubleSpinBox_T_outside.value()
 
         if not os.path.isdir(self.ui.lineEdit_data_path.text()):
-            QMessageBox.warning(self, 'Ошибка', 'Выбранной директории не существует')
+            QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
             return
 
         points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()))
@@ -180,7 +194,7 @@ class MainWindow(QMainWindow):
         try:
             Ts = self.Ts
         except AttributeError:
-            print(self.ui.lineEdit_x.text(), self.ui.lineEdit_y.text())
+            print(self.ui.spinBox_x.value(), self.ui.spinBox_y.value())
             return
 
         self.layout_temperature.removeWidget(self.canvas_temperature)
@@ -195,8 +209,8 @@ class MainWindow(QMainWindow):
         self.toolbar_temperature = NavigationToolbar(self.canvas_temperature, self)
         self.layout_temperature.addWidget(self.toolbar_temperature)
 
-        x = int(self.ui.lineEdit_x.text())
-        y = int(self.ui.lineEdit_y.text())
+        x = self.ui.spinBox_x.value()
+        y = self.ui.spinBox_y.value()
 
         T = []
 
@@ -212,9 +226,32 @@ class MainWindow(QMainWindow):
         directory = QFileDialog.getExistingDirectory()
         self.ui.lineEdit_data_path.setText(directory)
 
+        try:
+            self.points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()), False)
+        except FileNotFoundError as e:
+            QMessageBox.warning(self, 'Ошибка', str(e))
+            return
+
+        self.layout_geometry.removeWidget(self.canvas_geometry)
+        self.layout_geometry.removeWidget(self.toolbar_geometry)
+        self.toolbar_geometry.deleteLater()
+        self.canvas_geometry.deleteLater()
+        self.canvas_geometry.hide()
+        self.toolbar_geometry.hide()
+
+        self.canvas_geometry = MplCanvas(self, num=1, width=5, height=4, dpi=100,
+                                         title=f'Геометрия (слой {self.image})')  # (self.fig)
+        self.canvas_geometry.ax.set_xlabel('X', fontsize=16)
+        self.canvas_geometry.ax.set_ylabel('Y', fontsize=16)
+        self.layout_geometry.addWidget(self.canvas_geometry)
+        self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
+        self.layout_geometry.addWidget(self.toolbar_geometry)
+
+        draw2d(self.image, self.canvas_geometry.ax, self.points)
+
     def __export_csv(self):
         if not os.path.isdir(directory := self.ui.lineEdit_data_path.text()):
-            QMessageBox.warning(self, 'Ошибка', 'Выбранной директории не существует')
+            QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
             return
 
         file_path = QFileDialog.getSaveFileName(

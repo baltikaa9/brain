@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>871</width>
+    <width>1021</width>
     <height>683</height>
    </rect>
   </property>
@@ -52,7 +52,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_x"/>
+           <widget class="QSpinBox" name="spinBox_x">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_13">
@@ -62,7 +72,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_y"/>
+           <widget class="QSpinBox" name="spinBox_y">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_plot_temp">
@@ -91,7 +111,7 @@
        <item>
         <widget class="QWidget" name="widget_6" native="true">
          <layout class="QFormLayout" name="formLayout_2">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="label_9">
             <property name="font">
              <font>
@@ -99,23 +119,11 @@
              </font>
             </property>
             <property name="text">
-             <string>Время выполнения (с)</string>
+             <string>Время выполнения</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_6">
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>10</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="label_10">
             <property name="font">
              <font>
@@ -127,19 +135,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_7">
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="label_11">
             <property name="font">
              <font>
@@ -151,15 +147,45 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_8">
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_time">
+            <property name="suffix">
+             <string>c</string>
             </property>
-            <property name="text">
-             <string>0.1</string>
+            <property name="maximum">
+             <double>1000.000000000000000</double>
+            </property>
+            <property name="stepType">
+             <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+            </property>
+            <property name="value">
+             <double>10.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_dx">
+            <property name="decimals">
+             <number>3</number>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_dt">
+            <property name="decimals">
+             <number>3</number>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -355,24 +381,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>0.251</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_3">
             <property name="minimumSize">
@@ -388,30 +396,6 @@
             </property>
             <property name="text">
              <string>Удельная теплоемкость (c)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>3150</string>
             </property>
            </widget>
           </item>
@@ -433,186 +417,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_3">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>1108</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>38</string>
-            </property>
-           </widget>
-          </item>
-<!--          <item row="4" column="0">-->
-<!--           <widget class="QLabel" name="label_T_left">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>Температура слева (°C)</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="4" column="1">-->
-<!--           <widget class="QLineEdit" name="lineEdit_T_left">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>100.0</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="5" column="0">-->
-<!--           <widget class="QLabel" name="label_T_right">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>Температура справа (°C)</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="5" column="1">-->
-<!--           <widget class="QLineEdit" name="lineEdit_T_right">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>100.0</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="6" column="0">-->
-<!--           <widget class="QLabel" name="label_T_top">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>Температура сверху (°C)</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="6" column="1">-->
-<!--           <widget class="QLineEdit" name="lineEdit_T_top">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>100.0</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="7" column="0">-->
-<!--           <widget class="QLabel" name="label_T_bottom">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>Температура снизу (°C)</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
-<!--          <item row="7" column="1">-->
-<!--           <widget class="QLineEdit" name="lineEdit_T_bottom">-->
-<!--            <property name="minimumSize">-->
-<!--             <size>-->
-<!--              <width>0</width>-->
-<!--              <height>20</height>-->
-<!--             </size>-->
-<!--            </property>-->
-<!--            <property name="font">-->
-<!--             <font>-->
-<!--              <pointsize>11</pointsize>-->
-<!--             </font>-->
-<!--            </property>-->
-<!--            <property name="text">-->
-<!--             <string>100.0</string>-->
-<!--            </property>-->
-<!--           </widget>-->
-<!--          </item>-->
           <item row="8" column="0">
            <widget class="QLabel" name="label_T_outside">
             <property name="minimumSize">
@@ -627,25 +431,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Температура снаружи (°C)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="QLineEdit" name="lineEdit_T_outside">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>0.0</string>
+             <string>Температура снаружи</string>
             </property>
            </widget>
           </item>
@@ -663,7 +449,81 @@
              </font>
             </property>
             <property name="text">
-             <string>Начальная температура (T0)</string>
+             <string>Начальная температура</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_lam">
+            <property name="decimals">
+             <number>3</number>
+            </property>
+            <property name="maximum">
+             <double>100.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.251000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_c">
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <double>10000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>3150.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_rho">
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <double>10000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>1108.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_T_init">
+            <property name="suffix">
+             <string>°C</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-100.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>38.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_T_outside">
+            <property name="suffix">
+             <string>°C</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-100.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>20.000000000000000</double>
             </property>
            </widget>
           </item>
