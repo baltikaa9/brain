@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
         super().__init__(*args, **kwargs)
 
         self.image = 1
-        self.points = None
+        # self.points = None
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
         # draw2d(self.image, self.canvas_geometry.ax, 'images')
 
     def __next(self):
-        if self.image >= 132 or not self.points:
+        if self.image >= 132:
             return
 
         self.image += 1
@@ -107,11 +107,20 @@ class MainWindow(QMainWindow):
         #     QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
         #     return
 
-        if self.points:
-            draw2d(self.image, self.canvas_geometry.ax, self.points)
+        if not os.path.isdir(self.ui.lineEdit_data_path.text()):
+            QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
+            return
+
+        try:
+            points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()), False)
+        except FileNotFoundError as e:
+            QMessageBox.warning(self, 'Ошибка', str(e))
+            return
+
+        draw2d(self.image, self.canvas_geometry.ax, points)
 
     def __prev(self):
-        if self.image <= 1 or not self.points:
+        if self.image <= 1:
             return
 
         self.image -= 1
@@ -134,7 +143,17 @@ class MainWindow(QMainWindow):
         # if not os.path.isdir(self.ui.lineEdit_data_path.text()):
         #     QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
         #     return
-        draw2d(self.image, self.canvas_geometry.ax, self.points)
+        if not os.path.isdir(self.ui.lineEdit_data_path.text()):
+            QMessageBox.warning(self, 'Ошибка', self.DIRECTORY_IS_NOT_SPECIFIED)
+            return
+
+        try:
+            points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()), False)
+        except FileNotFoundError as e:
+            QMessageBox.warning(self, 'Ошибка', str(e))
+            return
+
+        draw2d(self.image, self.canvas_geometry.ax, points)
 
     def __start(self):
         t_max = self.ui.doubleSpinBox_time.value()
@@ -227,7 +246,7 @@ class MainWindow(QMainWindow):
         self.ui.lineEdit_data_path.setText(directory)
 
         try:
-            self.points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()), False)
+            points = get_points(open_image(self.image, self.ui.lineEdit_data_path.text()), False)
         except FileNotFoundError as e:
             QMessageBox.warning(self, 'Ошибка', str(e))
             return
@@ -247,7 +266,7 @@ class MainWindow(QMainWindow):
         self.toolbar_geometry = NavigationToolbar(self.canvas_geometry, self)
         self.layout_geometry.addWidget(self.toolbar_geometry)
 
-        draw2d(self.image, self.canvas_geometry.ax, self.points)
+        draw2d(self.image, self.canvas_geometry.ax, points)
 
     def __export_csv(self):
         if not os.path.isdir(directory := self.ui.lineEdit_data_path.text()):
